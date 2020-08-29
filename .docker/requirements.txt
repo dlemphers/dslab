@@ -1,0 +1,16 @@
+boto3
+metadata_parser
+tldextract
+pymongo[tls,srv]
+Faker
+elasticsearch
+ruamel.yaml
+shortuuid
+moment
+paramiko
+GitPython
+rq
+redis
+Jinja2
+auth0-python
+websocket-client
