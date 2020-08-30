@@ -16,6 +16,9 @@ up:
 		-f .docker-compose/dslab.yaml \
 		up --force-recreate -d
 
+	chmod 777 data
+	chmod 777 notebooks
+
 	@docker ps -aqf "name=$(PROJECT)" | xargs docker \
     	inspect --format 'http://{{.NetworkSettings.Networks.$(PROJECT).IPAddress}}:8888' | xargs \
         google-chrome
