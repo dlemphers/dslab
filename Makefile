@@ -5,7 +5,7 @@ build-notebook-base:
 	docker build --rm -t \
 	$(CONTAINER_IMAGE) \
 	-f .docker/Dockerfile .docker
-	docker push $(CONTAINER_IMAGE)
+	-docker push $(CONTAINER_IMAGE)
 
 
 up:
@@ -15,9 +15,6 @@ up:
 	docker-compose \
 		-f .docker-compose/dslab.yaml \
 		up --force-recreate -d
-
-	# Docker is going to own our working folders, need to reclaim them
-
 
 	@docker ps -aqf "name=$(PROJECT)" | xargs docker \
     	inspect --format 'http://{{.NetworkSettings.Networks.$(PROJECT).IPAddress}}:8888' | xargs \
