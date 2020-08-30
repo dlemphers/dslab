@@ -1,22 +1,28 @@
 PROJECT=dslab
-CONTAINER_TAG_SPACE=dlemphers/dslab:latest
+CONTAINER_IMAGE=dlemphers/dslab:latest
 
 build-notebook-base:
 	docker build --rm -t \
-	$(CONTAINER_TAG_SPACE) \
+	$(CONTAINER_IMAGE) \
 	-f .docker/Dockerfile .docker
-	docker push $(CONTAINER_TAG_SPACE)
+	docker push $(CONTAINER_IMAGE)
 
 
 up:
-	-docker-compose \
-		-f .docker-compose/dev.yaml \
+	-\
+	PROJECT=$(PROJECT) \
+	CONTAINER_IMAGE=$(CONTAINER_IMAGE) \
+	docker-compose \
+		-f .docker-compose/dslab.yaml \
 		up --force-recreate -d
 
-	@docker ps -aqf "name=deeptable.web" | xargs docker \
-    	inspect --format 'http://{{.NetworkSettings.Networks.deeptable.IPAddress}}' | xargs \
+	# Docker is going to own our working folders, need to reclaim them
+
+
+	@docker ps -aqf "name=$(PROJECT)" | xargs docker \
+    	inspect --format 'http://{{.NetworkSettings.Networks.$(PROJECT).IPAddress}}:8888' | xargs \
         google-chrome
 	 
 	docker-compose \
-		-f .docker-compose/dev.yaml \
+		-f .docker-compose/dslab.yaml \
 		logs -f

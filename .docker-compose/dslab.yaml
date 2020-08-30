@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+
+    jupyter:
+        image: ${CONTAINER_IMAGE}
+        container_name: ${PROJECT}
+        volumes:
+            - ../data:/home/jovyan/data
+            - ../notebooks:/home/jovyan/work
+        working_dir: /home/jovyan/work
+        entrypoint: start-notebook.sh --NotebookApp.token=''
+        networks:
+            - main-network
+  
+networks:
+    main-network:
+        name: ${PROJECT}
