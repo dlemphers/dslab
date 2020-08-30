@@ -20,6 +20,8 @@ up:
     	inspect --format 'http://{{.NetworkSettings.Networks.$(PROJECT).IPAddress}}:8888' | xargs \
         google-chrome
 	 
+	PROJECT=$(PROJECT) \
+	CONTAINER_IMAGE=$(CONTAINER_IMAGE) \
 	docker-compose \
 		-f .docker-compose/dslab.yaml \
 		logs -f
