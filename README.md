@@ -1,6 +1,14 @@
 # DS Lab is a simple project for running data science experiments in Jupyter locally.
 
+## Dependencies
+- docker
+- docker-compose
+
 ## Usage
+
+### Run as is
+
+Just run `make up` - Compose will create your Jupyter stack ready to go
 
 ### Configure for your own use
 
