@@ -1,3 +1,5 @@
+![Banner](https://github.com/dlemphers/dslab/blob/master/.assets/gh_banner.png)
+
 # DS Lab is a simple project for running data science experiments in Jupyter locally.
 
 ## Dependencies
